@@ -26,9 +26,6 @@ const Projects = () => {
       <div className="max-w-6xl mx-auto relative">
         <div className="flex flex-col md:flex-row md:items-end gap-4 mb-16">
           <div>
-            <span className="text-[#fa7705] font-black uppercase text-sm tracking-widest">
-              Selected_Works
-            </span>
             <h2 className="text-4xl md:text-5xl font-black text-[#190f24] mt-1">
               Featured Projects
             </h2>
