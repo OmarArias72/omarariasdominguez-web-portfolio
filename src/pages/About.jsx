@@ -5,6 +5,14 @@ const About = () => {
       id="about"
       className="py-24 px-6 bg-[#fef1e6] scroll-mt-24 relative overflow-hidden"
     >
+      {/* Fondo de cuaderno de puntos */}
+      <div
+        className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(#321d49 1px, transparent 1px)",
+          backgroundSize: "20px 20px",
+        }}
+      ></div>
       {/* Decoración: Círculo dibujado a mano en la esquina (Doodle) */}
       <div className="absolute -top-10 -right-10 text-[#cbb6e2] opacity-30 hidden md:block">
         <svg width="200" height="200" viewBox="0 0 100 100">

@@ -41,6 +41,13 @@ const Contact = () => {
       id="contact"
       className="py-24 px-6 bg-[#fef1e6] scroll-mt-24 relative"
     >
+      <div
+        className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(#321d49 1px, transparent 1px)",
+          backgroundSize: "20px 20px",
+        }}
+      ></div>
       <div className="max-w-xl mx-auto">
         {/* Título Estilo Sketch */}
         <div className="text-center mb-10">

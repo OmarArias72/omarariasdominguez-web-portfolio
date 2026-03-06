@@ -6,8 +6,16 @@ const Projects = () => {
     // Usamos el fondo sandy-brown-50 para simular el papel crema de la libreta
     <section
       id="projects"
-      className="py-24 px-6 bg-[#fef1e6] scroll-mt-24 relative overflow-hidden"
+      className="py-4 px-6 bg-[#fef1e6] scroll-mt-24 relative overflow-hidden"
     >
+      {/* Fondo de cuaderno de puntos */}
+      <div
+        className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(#321d49 1px, transparent 1px)",
+          backgroundSize: "20px 20px",
+        }}
+      ></div>
       {/* Decoración: Garabato de fondo */}
       <div className="absolute top-10 right-10 text-[#cbb6e2] opacity-40 select-none">
         <svg width="120" height="120" viewBox="0 0 100 100">
