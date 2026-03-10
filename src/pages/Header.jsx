@@ -102,6 +102,57 @@ const Header = () => {
     return () => clearTimeout(timer);
   }, [displayText, isDeleting, currentIdeaIndex, typingSpeed]);
 
+  // Función para obtener coordenadas precisas de cada nodo
+  const getNodeCoordinates = (node) => {
+    // Convertir porcentaje a píxeles relativos al contenedor
+    const containerWidth = 1200; // Ancho de referencia para el cálculo
+    const baseX = (parseFloat(node.x) / 100) * containerWidth;
+    const baseY = parseInt(node.y);
+
+    // Ajustes finos para que la línea toque exactamente cada círculo
+    const adjustments = {
+      1: { x: 0, y: 0 }, // Idea
+      2: { x: 5, y: -2 }, // Research
+      3: { x: 10, y: -5 }, // System design
+      4: { x: 15, y: -8 }, // Development
+      5: { x: 10, y: -5 }, // Testing
+      6: { x: 5, y: -2 }, // Configuration
+      7: { x: 0, y: 0 }, // Deployment
+    };
+
+    return {
+      x: baseX + adjustments[node.id].x,
+      y: baseY + 25 + adjustments[node.id].y, // +25 para centrar en el círculo
+    };
+  };
+
+  // Generar el path que conecta todos los nodos en orden
+  const generateConnectionPath = () => {
+    const points = nodes.map((node) => getNodeCoordinates(node));
+
+    // Crear un path curvo que pase por todos los puntos
+    let path = `M ${points[0].x},${points[0].y}`;
+
+    for (let i = 1; i < points.length; i++) {
+      const prev = points[i - 1];
+      const curr = points[i];
+
+      // Calcular puntos de control para una curva suave
+      const midX = (prev.x + curr.x) / 2;
+      const midY = (prev.y + curr.y) / 2;
+
+      // Ajustar la curva para que pase cerca de los puntos intermedios
+      const controlX1 = prev.x + (curr.x - prev.x) * 0.3;
+      const controlY1 = prev.y - 8; // Curva hacia arriba
+      const controlX2 = curr.x - (curr.x - prev.x) * 0.3;
+      const controlY2 = curr.y - 8; // Curva hacia arriba
+
+      path += ` C ${controlX1},${controlY1} ${controlX2},${controlY2} ${curr.x},${curr.y}`;
+    }
+
+    return path;
+  };
+
   return (
     <header className="relative min-h-screen flex flex-col items-center justify-start pt-30 px-6 overflow-hidden">
       {/* Doodles técnicos laterales - Código dibujado a mano */}
@@ -132,6 +183,7 @@ const Header = () => {
           backgroundSize: "20px 20px",
         }}
       ></div>
+
       {/* Ilustraciones de "Rayado" de fondo (Doodles) */}
       <div className="absolute top-32 left-10 text-[#cbb6e2] opacity-50 -rotate-12 hidden md:block">
         <svg width="100" height="100" viewBox="0 0 100 100">
@@ -194,7 +246,7 @@ const Header = () => {
       <div className="flex flex-wrap justify-center items-center gap-6 mb-20">
         {/* Botón CV */}
         <a
-          href="../../public/CV_Omar_Arias_Dominguez.pdf"
+          href="/CV_Omar_Arias_Dominguez.pdf"
           download="CV_Omar_Arias_Dominguez.pdf"
           className="flex items-center gap-2 bg-[#e5dbf0] hover:bg-[#7c49b6] text-[#4a2c6d] hover:text-white font-bold py-4 px-8 hand-drawn shadow-[4px_4px_0px_0px_rgba(42,44,109,0.2)] hover:shadow-[4px_4px_0px_0px_rgba(124,73,182,0.4)] transition-all duration-300 hover:scale-105 active:scale-95 no-underline border border-[#7c49b6]/20"
         >
@@ -221,48 +273,101 @@ const Header = () => {
         </a>
       </div>
 
-      {/* Nodos conectados animados - En forma de S */}
+      {/* Nodos conectados físicamente por una línea de lápiz */}
       <div className="relative w-full max-w-5xl mx-auto mt-4 px-4">
-        {/* Línea curva en forma de S que conecta los nodos */}
+        {/* SVG con la línea que conecta físicamente los nodos */}
         <svg
           className="absolute inset-0 w-full h-full pointer-events-none"
-          style={{ minHeight: "280px" }}
+          style={{ minHeight: "280px", width: "100%", height: "100%" }}
+          preserveAspectRatio="none"
+          viewBox="0 0 1200 280"
         >
           <defs>
             <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#fa7705" stopOpacity="0.3" />
-              <stop offset="25%" stopColor="#7c49b6" stopOpacity="0.4" />
-              <stop offset="50%" stopColor="#38c7bd" stopOpacity="0.5" />
-              <stop offset="75%" stopColor="#4a2c6d" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#e57373" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="#fa7705" stopOpacity="0.6" />
+              <stop offset="20%" stopColor="#7c49b6" stopOpacity="0.7" />
+              <stop offset="40%" stopColor="#38c7bd" stopOpacity="0.8" />
+              <stop offset="60%" stopColor="#4a2c6d" stopOpacity="0.7" />
+              <stop offset="80%" stopColor="#ffb347" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#e57373" stopOpacity="0.5" />
             </linearGradient>
+
+            {/* Filtro para efecto de lápiz/textura */}
           </defs>
 
-          {/* Camino curvo en forma de S - Ajustado para los nuevos valores Y */}
+          {/* Sombra difusa debajo de la línea */}
           <path
-            d="M 5% 60 Q 20% 30, 35% 45 T 50% 40 T 65% 45 T 80% 60 T 95% 80"
+            d={generateConnectionPath()}
+            fill="none"
+            stroke="#190f24"
+            strokeWidth="6"
+            strokeOpacity="0.1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+
+          {/* Línea principal con efecto de lápiz */}
+          <path
+            d={generateConnectionPath()}
             fill="none"
             stroke="url(#pathGradient)"
-            strokeWidth="3"
-            strokeDasharray="12 8"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeDasharray="8 6"
+            filter="url(#pencilTexture)"
             className="animate-dash-slow"
           />
 
-          {/* Puntos decorativos a lo largo del camino */}
-          {[15, 30, 45, 60, 75, 90].map((percent, index) => (
-            <circle
-              key={`dot-${index}`}
-              cx={`${percent}%`}
-              cy={percent < 40 ? "45" : percent < 70 ? "50" : "70"}
-              r="3"
-              fill={index % 2 === 0 ? "#fa7705" : "#7c49b6"}
-              className="animate-pulse"
-              style={{ animationDelay: `${index * 0.2}s` }}
-            />
-          ))}
+          {/* Puntos decorativos en las uniones (simulando notas adhesivas) */}
+          {nodes.map((node, index) => {
+            const coords = getNodeCoordinates(node);
+            return (
+              <circle
+                key={`dot-${node.id}`}
+                cx={coords.x}
+                cy={coords.y}
+                r="4"
+                fill={node.color}
+                stroke="#190f24"
+                strokeWidth="1.5"
+                className="animate-pulse"
+                style={{ animationDelay: `${index * 0.2}s` }}
+              />
+            );
+          })}
+
+          {/* Pequeñas líneas cruzadas simulando "cinta adhesiva" en cada unión */}
+          {nodes.map((node) => {
+            const coords = getNodeCoordinates(node);
+            return (
+              <g key={`tape-${node.id}`}>
+                <line
+                  x1={coords.x - 8}
+                  y1={coords.y - 8}
+                  x2={coords.x - 2}
+                  y2={coords.y - 2}
+                  stroke="#190f24"
+                  strokeWidth="1.5"
+                  strokeOpacity="0.2"
+                  strokeLinecap="round"
+                />
+                <line
+                  x1={coords.x + 8}
+                  y1={coords.y - 8}
+                  x2={coords.x + 2}
+                  y2={coords.y - 2}
+                  stroke="#190f24"
+                  strokeWidth="1.5"
+                  strokeOpacity="0.2"
+                  strokeLinecap="round"
+                />
+              </g>
+            );
+          })}
         </svg>
 
-        {/* Nodos posicionados en la curva */}
+        {/* Nodos posicionados en la curva - CONECTADOS FÍSICAMENTE POR LA LÍNEA */}
         <div className="relative w-full h-70">
           {nodes.map((node) => (
             <div
@@ -276,11 +381,11 @@ const Header = () => {
             >
               {/* Círculo contenedor del icono */}
               <div
-                className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 flex items-center justify-center mb-2 transition-all duration-500 hover:scale-110 hover:rotate-6 bg-white/80 backdrop-blur-sm"
+                className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 flex items-center justify-center mb-2 transition-all duration-500 hover:scale-110 hover:rotate-6 bg-white/90 backdrop-blur-sm"
                 style={{
                   borderColor: node.color,
-                  backgroundColor: `${node.color}10`,
-                  boxShadow: `0 4px 8px ${node.color}20`,
+                  backgroundColor: `${node.color}15`,
+                  boxShadow: `0 4px 12px ${node.color}40`,
                 }}
               >
                 {/* Icono SVG */}
@@ -288,7 +393,7 @@ const Header = () => {
                   src={`/svg-icons/${node.icon}`}
                   alt={node.title}
                   className="w-6 h-6 md:w-7 md:h-7 transition-transform duration-300 group-hover:scale-110"
-                  style={{ filter: `drop-shadow(0 2px 4px ${node.color}40)` }}
+                  style={{ filter: `drop-shadow(0 2px 4px ${node.color}80)` }}
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = `https://via.placeholder.com/24/${node.color.replace("#", "")}/ffffff?text=${node.title[0]}`;
@@ -298,7 +403,7 @@ const Header = () => {
 
               {/* Título del nodo */}
               <span
-                className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-center max-w-20 bg-white/60 px-2 py-1 rounded-full backdrop-blur-sm"
+                className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-center max-w-20 bg-white/80 px-2 py-1 rounded-full backdrop-blur-sm border border-[#190f24]/10 shadow-sm"
                 style={{ color: node.color }}
               >
                 {node.title}
@@ -366,7 +471,7 @@ const Header = () => {
         }
         .animate-dash-slow {
           stroke-dashoffset: 0;
-          animation: dash-slow 30s linear infinite;
+          animation: dash-slow 25s linear infinite;
         }
         .animate-bounce-slow {
           animation: bounce 2s ease-in-out infinite;
