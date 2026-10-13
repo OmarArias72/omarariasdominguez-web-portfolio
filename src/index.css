@@ -1,13 +1,84 @@
 @import "tailwindcss";
 
+/*
+  Animaciones del proyecto (Tailwind v4: las keyframes dentro de @theme
+  generan las utilidades animate-*). Sustituyen a los <style jsx>, que es
+  sintaxis de Next.js y no funciona en Vite.
+  Importante: en v4 `translate`, `rotate` y `scale` son propiedades
+  independientes de `transform`, por eso estas keyframes solo animan
+  translateY y no vuelven a aplicar el translateX(-50%) de centrado.
+*/
+@theme {
+  --animate-float-slow: float-slow 6s ease-in-out infinite;
+  --animate-float-node: float-node 4s ease-in-out infinite;
+  --animate-bounce-slow: bounce-slow 2s ease-in-out infinite;
+  --animate-dash-slow: dash-slow 25s linear infinite;
+
+  @keyframes float-slow {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-4px) rotate(1deg);
+    }
+    50% {
+      transform: translateY(-8px) rotate(2deg);
+    }
+    75% {
+      transform: translateY(-2px) rotate(1deg);
+    }
+  }
+  @keyframes float-node {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+  @keyframes bounce-slow {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes dash-slow {
+    to {
+      stroke-dashoffset: -40;
+    }
+  }
+}
+
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    /* Efecto de papel con líneas azules */
-    background-color: #fef1e6; /* sandy-brown-50 como papel crema */
-    /* background-image: linear-gradient(#d7f4f2 1px, transparent 1px); */
-    background-size: 100% 30px;
-    font-family:
-      "Inter", sans-serif; /* Idealmente usa una tipo "Handwritten" de Google Fonts */
+    /* Efecto de papel crema */
+    background-color: #fef1e6;
+    font-family: "Inter", sans-serif;
+    /* Evita scroll horizontal por decoraciones que sobresalen */
+    overflow-x: clip;
+  }
+
+  /* Respeta la preferencia de movimiento reducido en todo el sitio */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 
   /* Clase para bordes dibujados a mano */

@@ -1,29 +1,36 @@
+// src/data/projects.js
+
+// 1. Importa las imágenes al inicio del archivo
+import techZoneImg from '../../public/project-icons/techzone.png';
+import posGadgetsImg from '../../public/project-icons/pos-gadgets.png';
+import ticInventarioImg from '../../public/project-icons/tic-inventario.png';
+
 export const projects = [
   {
     id: 1,
     title: "Tech Zone E-commerce",
     description:
-      "Plataforma de comercio electrónico integral con panel administrativo, gestión de envíos manuales e integración de pagos con PayPal.",
+      "Plataforma de comercio electrónico integral con panel administrativo, gestión de envíos marítimos y integración de pagos.",
     tags: ["Laravel", "React", "MySQL", "PayPal API"],
-    link: "#", // Enlace a GitHub o Demo
-    image: "https://via.placeholder.com/600x400", // Sustituye por tus capturas
+    link: "https://github.com/OmarArias72/sesionEjemplo", // Enlace a GitHub o Demo
+    image: techZoneImg,
   },
   {
     id: 2,
-    title: "Hand Contour Detection",
+    title: "POS-Gadgets",
     description:
-      "Sistema de visión artificial para detectar manos y dibujar contornos en tiempo real, optimizado para ignorar rostros y ruido ambiental.",
-    tags: ["Python", "OpenCV", "MediaPipe"],
-    link: "#",
-    image: "https://via.placeholder.com/600x400",
+      "Sistema para llevar el control de inventario, ventas, facturas, pago de nóminas y gestión de usuarios.",
+    tags: ["Java", "JavaFX", "Postgres", "Maven"],
+    link: "https://github.com/OmarArias72/POS-Gadgets",
+    image: posGadgetsImg,
   },
   {
     id: 3,
-    title: "Mexican Peso Segmentation",
+    title: "TIC Inventario",
     description:
-      "Proyecto de Computer Vision para segmentar y clasificar monedas de peso mexicano en video en vivo basado en su bimetalismo.",
-    tags: ["Python", "OpenCV", "Image Processing"],
-    link: "#",
-    image: "https://via.placeholder.com/600x400",
+      "Sistema para llevar el control de inventarios, gestión de inventario de salas de cómputo y rastreo de fallos, así como la gestión de salas en periodos ordinario, extraordinario y título.",
+    tags: ["React", "Spring Boot", "Java","Postgres","Docker"],
+    link: "https://github.com/OmarArias72/TIC-UAEMEX-WEB",
+    image: ticInventarioImg,
   },
 ];

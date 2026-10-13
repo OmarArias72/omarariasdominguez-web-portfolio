@@ -1,12 +1,15 @@
 import { projects } from "../data/projects";
 import ProjectCard from "../components/common/ProjectCard";
+import { useLanguage } from "../language/useLanguage";
 
 const Projects = () => {
+  const { t } = useLanguage();
+
   return (
     // Usamos el fondo sandy-brown-50 para simular el papel crema de la libreta
     <section
       id="projects"
-      className="py-4 px-6 bg-[#fef1e6] scroll-mt-24 relative overflow-hidden"
+      className="py-8 md:py-4 px-4 sm:px-6 bg-[#fef1e6] scroll-mt-24 relative overflow-hidden"
     >
       {/* Fondo de cuaderno de puntos */}
       <div
@@ -17,7 +20,10 @@ const Projects = () => {
         }}
       ></div>
       {/* Decoración: Garabato de fondo */}
-      <div className="absolute top-10 right-10 text-[#cbb6e2] opacity-40 select-none">
+      <div
+        aria-hidden="true"
+        className="absolute top-10 right-10 hidden sm:block text-[#cbb6e2] opacity-40 select-none"
+      >
         <svg width="120" height="120" viewBox="0 0 100 100">
           <circle
             cx="50"
@@ -32,15 +38,15 @@ const Projects = () => {
       </div>
 
       <div className="max-w-6xl mx-auto relative">
-        <div className="flex flex-col md:flex-row md:items-end gap-4 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end gap-4 mb-10 md:mb-16">
           <div>
-            <h2 className="text-4xl md:text-5xl font-black text-[#190f24] mt-1">
-              Featured Projects
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#190f24] mt-1">
+              {t.projects.title}
             </h2>
           </div>
           {/* Línea divisoria estilo rayado manual */}
           <div
-            className="h-2 grow bg-repeat-x"
+            className="h-2 w-full md:w-auto md:grow bg-repeat-x"
             style={{
               backgroundImage:
                 "radial-gradient(circle, #b092d3 2px, transparent 2px)",
@@ -50,7 +56,7 @@ const Projects = () => {
         </div>
 
         {/* Grid Responsivo */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
           {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}

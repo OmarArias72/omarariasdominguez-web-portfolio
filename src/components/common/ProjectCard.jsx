@@ -1,22 +1,36 @@
+import { useLanguage } from "../../language/useLanguage";
+
 const ProjectCard = ({ project }) => {
+  const { t } = useLanguage();
+
+  // Los títulos y descripciones viven en translations.js por id.
+  // Si falta la entrada para un id, se usa el contenido de projects.js como fallback.
+  const item = t.projects.items?.[project.id];
+  const title = item?.title ?? project.title;
+  const description = item?.description ?? project.description;
+
   return (
-    <div className="group relative bg-white hand-drawn shadow-[8px_8px_0px_0px_rgba(42,44,109,0.1)] hover:shadow-[12px_12px_0px_0px_rgba(124,73,182,0.4)] transition-all duration-300 hover:-rotate-1">
+    <article className="group relative flex h-full flex-col bg-white hand-drawn shadow-[8px_8px_0px_0px_rgba(42,44,109,0.1)] hover:shadow-[12px_12px_0px_0px_rgba(124,73,182,0.4)] transition-all duration-300 hover:-rotate-1">
       {/* Imagen del Proyecto con marco de dibujo */}
       <div className="m-4 aspect-video overflow-hidden border-2 border-[#190f24] rounded-lg bg-[#f2edf8]">
         <img
           src={project.image}
-          alt={project.title}
+          alt={title}
+          width="600"
+          height="400"
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 grayscale-30 group-hover:grayscale-0"
         />
       </div>
 
       {/* Contenido */}
-      <div className="p-6 pt-2">
+      <div className="flex flex-1 flex-col p-5 pt-2 sm:p-6 sm:pt-2">
         <h3 className="text-xl font-black text-[#190f24] mb-2 font-mono">
-          {project.title}
+          {title}
         </h3>
-        <p className="text-[#53464b] text-sm mb-4 line-clamp-3 text-justify font-medium leading-relaxed">
-          {project.description}
+        <p className="text-[#53464b] text-sm mb-4 line-clamp-3 text-left sm:text-justify font-medium leading-relaxed">
+          {description}
         </p>
 
         {/* Tags de Tecnología - Estilo burbuja de texto */}
@@ -36,11 +50,12 @@ const ProjectCard = ({ project }) => {
           href={project.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center text-sm font-black text-[#7c49b6] hover:text-[#fa7705] transition-colors group/link"
+          className="mt-auto inline-flex items-center self-start rounded-sm text-sm font-black text-[#7c49b6] hover:text-[#fa7705] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7c49b6] transition-colors group/link"
         >
-          EXPLORE PROJECT
+          {t.projects.explore}
           <svg
-            className="w-5 h-5 ml-2 transform group-hover/link:translate-x-2 transition-transform"
+            aria-hidden="true"
+            className="w-5 h-5 ml-2 group-hover/link:translate-x-2 transition-transform"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -55,7 +70,7 @@ const ProjectCard = ({ project }) => {
           </svg>
         </a>
       </div>
-    </div>
+    </article>
   );
 };
 

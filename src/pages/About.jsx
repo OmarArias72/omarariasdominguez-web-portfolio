@@ -1,62 +1,69 @@
 import { useState } from "react";
+import { useLanguage } from "../language/useLanguage";
+
+// Iconos decorativos: constantes de módulo (no se recrean en cada render)
+const floatingIcons = [
+  {
+    id: 1,
+    src: "/icons-animated/coffee-cup.gif",
+    type: "gif",
+    position: "top-left",
+    delay: "0s",
+  },
+  {
+    id: 2,
+    src: "/icons-animated/rocket.gif",
+    type: "gif",
+    position: "top-right",
+    delay: "0.2s",
+  },
+  {
+    id: 3,
+    src: "/icons-animated/physics.gif",
+    type: "gif",
+    position: "bottom-left",
+    delay: "0.4s",
+  },
+  {
+    id: 4,
+    src: "/svg-icons/mind-svgrepo-com.svg",
+    type: "svg",
+    position: "bottom-right",
+    delay: "0.6s",
+  },
+];
+
+// Mobile-first: base = móvil, md y xl amplían el desplazamiento hacia fuera
+const positionClasses = {
+  "top-left": "-top-12 -left-8 md:-top-24 md:-left-16 xl:-top-32 xl:-left-20",
+  "top-right":
+    "-top-12 -right-8 md:-top-24 md:-right-16 xl:-top-32 xl:-right-20",
+  "bottom-left":
+    "-bottom-12 -left-8 md:-bottom-24 md:-left-16 xl:-bottom-32 xl:-left-20",
+  "bottom-right":
+    "-bottom-12 -right-8 md:-bottom-24 md:-right-16 xl:-bottom-32 xl:-right-20",
+};
+
+// En Tailwind v4 `rotate` es una propiedad propia: cada estado define UNA sola rotación
+const visibleRotation = {
+  "top-left": "-rotate-12",
+  "top-right": "rotate-12",
+  "bottom-left": "rotate-12",
+  "bottom-right": "-rotate-12",
+};
+
+const getPositionStyles = (position, isVisible) =>
+  [
+    "pointer-events-none absolute z-0 transition-all duration-700",
+    positionClasses[position],
+    isVisible
+      ? `opacity-20 scale-90 translate-x-0 translate-y-0 ${visibleRotation[position]}`
+      : "opacity-0 scale-0 translate-x-20 translate-y-20 rotate-45",
+  ].join(" ");
 
 const About = () => {
+  const { t } = useLanguage();
   const [isPhotoHovered, setIsPhotoHovered] = useState(false);
-
-  // Configuración de iconos - REDUCIDOS a 4 puntos clave con opacidad baja
-  const floatingIcons = [
-    // Solo 4 iconos estratégicos con opacidad baja
-    {
-      id: 1,
-      src: "/icons-animated/coffee-cup.gif",
-      type: "gif",
-      position: "top-left",
-      delay: "0s",
-    },
-    {
-      id: 2,
-      src: "/icons-animated/rocket.gif",
-      type: "gif",
-      position: "top-right",
-      delay: "0.2s",
-    },
-    {
-      id: 3,
-      src: "/icons-animated/physics.gif",
-      type: "gif",
-      position: "bottom-left",
-      delay: "0.4s",
-    },
-    {
-      id: 4,
-      src: "/svg-icons/mind-svgrepo-com.svg",
-      type: "svg",
-      position: "bottom-right",
-      delay: "0.6s",
-    },
-  ];
-
-  const getPositionStyles = (position) => {
-    const baseStyles = "absolute transition-all duration-700 z-0";
-    // Opacidad mucho más baja: 20% cuando visible, 0% cuando oculto
-    const hoverStyles = isPhotoHovered
-      ? "opacity-20 scale-90 translate-x-0 translate-y-0 rotate-0"
-      : "opacity-0 scale-0 translate-x-20 translate-y-20 rotate-45";
-
-    // Posiciones responsivas
-    const positionClasses = {
-      "top-left":
-        "max-md:-top-12 max-md:-left-8 -top-24 -left-16 xl:-top-32 xl:-left-20 rotate-[-12deg]",
-      "top-right":
-        "max-md:-top-12 max-md:-right-8 -top-24 -right-16 xl:-top-32 xl:-right-20 rotate-[12deg]",
-      "bottom-left":
-        "max-md:-bottom-12 max-md:-left-8 -bottom-24 -left-16 xl:-bottom-32 xl:-left-20 rotate-[12deg]",
-      "bottom-right":
-        "max-md:-bottom-12 max-md:-right-8 -bottom-24 -right-16 xl:-bottom-32 xl:-right-20 rotate-[-12deg]",
-    };
-
-    return `${baseStyles} ${positionClasses[position]} ${hoverStyles}`;
-  };
 
   return (
     <section
@@ -89,7 +96,7 @@ const About = () => {
         {/* Título con subrayado tipo resaltador */}
         <div className="relative mb-8 md:mb-12 inline-block">
           <h2 className="text-3xl md:text-5xl font-black text-[#190f24] relative z-10">
-            About me
+            {t.about.title}
           </h2>
           <div className="absolute bottom-1 left-0 w-full h-4 bg-[#ccffcc] -rotate-1 z-0"></div>
 
@@ -129,20 +136,17 @@ const About = () => {
               ></div>
 
               <div className="relative z-10">
-                <p className="text-base md:text-lg lg:text-xl text-[#53464b] leading-relaxed text-justify font-medium mb-4">
-                  I am a{" "}
+                <p className="text-base md:text-lg lg:text-xl text-[#53464b] leading-relaxed text-left md:text-justify font-medium mb-4">
+                  {t.about.p1Before}{" "}
                   <span className="text-[#7c49b6] font-black italic bg-[#fef1e6] px-1">
-                    Full Stack Developer
+                    {t.about.p1Highlight}
                   </span>{" "}
-                  with two years of experience building solutions that integrate
-                  backend and frontend to deliver functional applications
-                  aligned with business needs.
+                  {t.about.p1After}
                 </p>
-                <p className="text-base md:text-lg lg:text-xl text-[#53464b] leading-relaxed text-justify font-medium">
-                  My focus is on connecting systems, developing products, and
-                  creating tools that generate{" "}
+                <p className="text-base md:text-lg lg:text-xl text-[#53464b] leading-relaxed text-left md:text-justify font-medium">
+                  {t.about.p2Before}{" "}
                   <span className="text-[#190f24] font-bold relative">
-                    real impact
+                    {t.about.p2Impact}
                     <svg
                       className="absolute -bottom-2 left-0 w-full h-2 text-[#fa7705]"
                       preserveAspectRatio="none"
@@ -155,11 +159,11 @@ const About = () => {
                       />
                     </svg>
                   </span>
-                  , combining technologies such as{" "}
+                  {t.about.p2Middle}{" "}
                   <span className="text-[#4a2c6d] font-bold border-b-4 border-dashed border-[#38c7bd]">
-                    Java, Python, Spring Boot, and React
+                    {t.about.p2Tech}
                   </span>{" "}
-                  to design complete flows from server logic to user experience.
+                  {t.about.p2After}
                 </p>
               </div>
 
@@ -183,17 +187,15 @@ const About = () => {
 
           {/* COLUMNA DERECHA: LA FOTO CON ICONOS FLOTANTES (TEXTURA DE FONDO) */}
           <div
-            className="flex justify-center items-center relative group min-h-75 md:min-h-100 mt-8 lg:mt-0"
+            className="flex justify-center items-center relative group min-h-75 md:min-h-100 mt-8 lg:mt-0 mx-8 md:mx-0"
             onMouseEnter={() => setIsPhotoHovered(true)}
             onMouseLeave={() => setIsPhotoHovered(false)}
           >
             {/* Elementos decorativos alrededor de la foto */}
             <div className="absolute -top-6 -left-6 text-[#fa7705] rotate-12 group-hover:scale-110 transition-transform z-10 opacity-40">
               <svg
-                width="30"
-                height="30"
-                md-width="40"
-                md-height="40"
+                aria-hidden="true"
+                className="h-7 w-7 md:h-10 md:w-10"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -207,7 +209,8 @@ const About = () => {
             {floatingIcons.map((icon) => (
               <div
                 key={icon.id}
-                className={getPositionStyles(icon.position)}
+                className={getPositionStyles(icon.position, isPhotoHovered)}
+                aria-hidden="true"
                 style={{
                   transitionDelay: icon.delay,
                   transitionProperty: "all",
@@ -218,6 +221,10 @@ const About = () => {
                   <img
                     src={icon.src}
                     alt=""
+                    width="96"
+                    height="96"
+                    loading="lazy"
+                    decoding="async"
                     className={`w-14 h-14 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain ${
                       icon.type === "gif"
                         ? "animate-float-slow mix-blend-multiply"
@@ -258,10 +265,8 @@ const About = () => {
             {/* Garabato naranja inferior */}
             <div className="absolute -bottom-8 md:-bottom-10 -right-2 md:-right-4 text-[#fa7705] opacity-20 md:opacity-30 z-20">
               <svg
-                width="60"
-                height="30"
-                md-width="80"
-                md-height="40"
+                aria-hidden="true"
+                className="h-7 w-14 md:h-10 md:w-20"
                 viewBox="0 0 100 40"
               >
                 <path
@@ -288,28 +293,6 @@ const About = () => {
           </svg>
         </div>
       </div>
-
-      {/* Estilos adicionales para animaciones */}
-      <style jsx>{`
-        @keyframes float-slow {
-          0%,
-          100% {
-            transform: translateY(0px) rotate(0deg);
-          }
-          25% {
-            transform: translateY(-4px) rotate(1deg);
-          }
-          50% {
-            transform: translateY(-8px) rotate(2deg);
-          }
-          75% {
-            transform: translateY(-2px) rotate(1deg);
-          }
-        }
-        .animate-float-slow {
-          animation: float-slow 6s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
 };
