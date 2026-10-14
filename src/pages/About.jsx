@@ -247,7 +247,7 @@ const About = () => {
               {/* Espacio para la foto */}
               <div className="w-48 h-48 md:w-64 md:h-64 lg:w-72 lg:h-72 bg-[#f3f4f6] overflow-hidden border-2 border-[#190f24]">
                 <img
-                  src="https://via.placeholder.com/300x300"
+                  src="/perfil/Perfil-foto.jpg"
                   alt="Omar Arias"
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                 />
