@@ -56,30 +56,64 @@ export const translations = {
       p2Impact: "real impact",
       p2Middle: ", combining technologies such as",
       p2Tech: "Java, Python, Spring Boot, and React",
-      p2After:
-        "to design complete flows from server logic to user experience.",
+      p2After: "to design complete flows from server logic to user experience.",
     },
     projects: {
-  title: "Featured Projects",
-  explore: "EXPLORE PROJECT",
-  items: {
-    1: {
-      title: "Tech Zone E-commerce",
-      description:
-        "Full e-commerce platform with admin panel, manual shipping management and PayPal payment integration.",
+      title: "Featured Projects",
+      explore: "EXPLORE PROJECT",
+      preview: "PREVIEW",
+      modal: {
+        close: "Close preview",
+        overview: "Overview",
+        highlights: "Highlights",
+        technologies: "Technologies",
+        viewRepo: "View repository",
+        gallery: "Project images",
+        prev: "Previous image",
+        next: "Next image",
+        imageOf: "Image {current} of {total}",
+        showImage: "Show image {n}",
+      },
+      items: {
+        1: {
+          title: "Tech Zone E-commerce",
+          description:
+            "Full e-commerce platform with admin panel, manual shipping management and PayPal payment integration.",
+          details:
+            "Tech Zone is a complete online store. It combines an administrative panel to manage the store, shipping management and online payments through the PayPal API. It is built with Laravel, React and MySQL.",
+          highlights: [
+            "Administrative panel to manage the store",
+            "Shipping management",
+            "PayPal payment integration",
+          ],
+        },
+        2: {
+          title: "POS-Gadgets",
+          description:
+            "System to manage inventory, sales, invoices, payroll processing and user management.",
+          details:
+            "POS-Gadgets is a point-of-sale system that brings inventory, sales, invoicing, payroll and user management together in a single application. It is built with Java and JavaFX, uses PostgreSQL for data storage and Maven to manage the build.",
+          highlights: [
+            "Inventory control",
+            "Sales and invoices",
+            "Payroll processing",
+            "User management",
+          ],
+        },
+        3: {
+          title: "TIC Inventario",
+          description:
+            "System for inventory control, computer lab inventory management and failure tracking, as well as lab scheduling for ordinary, extraordinary and thesis periods.",
+          details:
+            "TIC Inventario is a web system for inventory control. It manages the inventory of computer labs, tracks failures and handles lab scheduling across ordinary, extraordinary and thesis periods. It is built with React, Spring Boot and Java, uses PostgreSQL and runs with Docker.",
+          highlights: [
+            "General inventory control",
+            "Computer lab inventory and failure tracking",
+            "Lab scheduling by period (ordinary, extraordinary, thesis)",
+          ],
+        },
+      },
     },
-    2: {
-      title: "POS-Gadgets",
-      description:
-        "System to manage inventory, sales, invoices, payroll processing and user management.",
-    },
-    3: {
-      title: "TIC Inventario",
-      description:
-        "System for inventory control, computer lab inventory management and failure tracking, as well as lab scheduling for ordinary, extraordinary and thesis periods.",
-    },
-  },
-},
     skills: {
       title: "Skills & Tools",
       backend: "Backend",
@@ -103,7 +137,7 @@ export const translations = {
       availableTitle: "📅 AVAILABLE",
       availableText: "Full-time / Freelance / Remote",
       stackTitle: "🛠️ STACK",
-      quote: "\"Code is poetry ✍️\"",
+      quote: '"Code is poetry ✍️"',
       endOfLine: "// End of line",
     },
   },
@@ -162,26 +196,61 @@ export const translations = {
         "para diseñar flujos completos, desde la lógica del servidor hasta la experiencia de usuario.",
     },
     projects: {
-  title: "Proyectos destacados",
-  explore: "VER PROYECTO",
-  items: {
-    1: {
-      title: "Tech Zone E-commerce",
-      description:
-        "Plataforma de comercio electrónico integral con panel administrativo, gestión de envíos marítimos e integración de pagos.",
+      title: "Proyectos destacados",
+      explore: "VER PROYECTO",
+      preview: "VISTA PREVIA",
+      modal: {
+        close: "Cerrar vista previa",
+        overview: "Descripción",
+        highlights: "Características",
+        technologies: "Tecnologías",
+        viewRepo: "Ver repositorio",
+        gallery: "Imágenes del proyecto",
+        prev: "Imagen anterior",
+        next: "Imagen siguiente",
+        imageOf: "Imagen {current} de {total}",
+        showImage: "Ver imagen {n}",
+      },
+      items: {
+        1: {
+          title: "Tech Zone E-commerce",
+          description:
+            "Plataforma de comercio electrónico integral con panel administrativo, gestión de envíos marítimos e integración de pagos.",
+          details:
+            "Tech Zone es una tienda en línea completa. Combina un panel administrativo para gestionar la tienda, la gestión de envíos y pagos en línea mediante la API de PayPal. Está construida con Laravel, React y MySQL.",
+          highlights: [
+            "Panel administrativo para gestionar la tienda",
+            "Gestión de envíos",
+            "Integración de pagos con PayPal",
+          ],
+        },
+        2: {
+          title: "POS-Gadgets",
+          description:
+            "Sistema para llevar el control de inventario, ventas, facturas, pago de nóminas y gestión de usuarios.",
+          details:
+            "POS-Gadgets es un sistema de punto de venta que reúne inventario, ventas, facturación, nóminas y gestión de usuarios en una sola aplicación. Está construido con Java y JavaFX, usa PostgreSQL para almacenar los datos y Maven para gestionar la compilación.",
+          highlights: [
+            "Control de inventario",
+            "Ventas y facturas",
+            "Pago de nóminas",
+            "Gestión de usuarios",
+          ],
+        },
+        3: {
+          title: "TIC Inventario",
+          description:
+            "Sistema para llevar el control de inventarios, gestión de inventario de salas de cómputo y rastreo de fallos, así como la gestión de salas en periodos ordinario, extraordinario y título.",
+          details:
+            "TIC Inventario es un sistema web para el control de inventarios. Gestiona el inventario de las salas de cómputo, rastrea fallos y administra la asignación de salas en los periodos ordinario, extraordinario y de título. Está construido con React, Spring Boot y Java, usa PostgreSQL y se ejecuta con Docker.",
+          highlights: [
+            "Control general de inventarios",
+            "Inventario de salas de cómputo y rastreo de fallos",
+            "Gestión de salas por periodo (ordinario, extraordinario, título)",
+          ],
+        },
+      },
     },
-    2: {
-      title: "POS-Gadgets",
-      description:
-        "Sistema para llevar el control de inventario, ventas, facturas, pago de nóminas y gestión de usuarios.",
-    },
-    3: {
-      title: "TIC Inventario",
-      description:
-        "Sistema para llevar el control de inventarios, gestión de inventario de salas de cómputo y rastreo de fallos, así como la gestión de salas en periodos ordinario, extraordinario y título.",
-    },
-  },
-},
     skills: {
       title: "Habilidades y herramientas",
       backend: "Backend",
@@ -205,7 +274,7 @@ export const translations = {
       availableTitle: "📅 DISPONIBLE",
       availableText: "Tiempo completo / Freelance / Remoto",
       stackTitle: "🛠️ STACK",
-      quote: "\"El código es poesía ✍️\"",
+      quote: '"El código es poesía ✍️"',
       endOfLine: "// Fin de línea",
     },
   },

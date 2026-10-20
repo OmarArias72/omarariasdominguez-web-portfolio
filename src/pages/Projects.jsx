@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { projects } from "../data/projects";
 import ProjectCard from "../components/common/ProjectCard";
+import ProjectModal from "../components/common/ProjectModal";
 import { useLanguage } from "../language/useLanguage";
 
 const Projects = () => {
   const { t } = useLanguage();
+  // Proyecto abierto en la vista previa (null = modal cerrado)
+  const [previewProject, setPreviewProject] = useState(null);
 
   return (
     // Usamos el fondo sandy-brown-50 para simular el papel crema de la libreta
@@ -58,10 +62,19 @@ const Projects = () => {
         {/* Grid Responsivo */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
           {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              onPreview={setPreviewProject}
+            />
           ))}
         </div>
       </div>
+
+      <ProjectModal
+        project={previewProject}
+        onClose={() => setPreviewProject(null)}
+      />
     </section>
   );
 };

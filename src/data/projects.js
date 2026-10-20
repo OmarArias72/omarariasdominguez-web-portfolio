@@ -1,10 +1,5 @@
 // src/data/projects.js
 
-// 1. Importa las imágenes al inicio del archivo
-import techZoneImg from '../../public/project-icons/techzone.png';
-import posGadgetsImg from '../../public/project-icons/pos-gadgets.png';
-import ticInventarioImg from '../../public/project-icons/tic-inventario.png';
-
 export const projects = [
   {
     id: 1,
@@ -13,7 +8,14 @@ export const projects = [
       "Plataforma de comercio electrónico integral con panel administrativo, gestión de envíos marítimos y integración de pagos.",
     tags: ["Laravel", "React", "MySQL", "PayPal API"],
     link: "https://github.com/OmarArias72/sesionEjemplo", // Enlace a GitHub o Demo
-    image: techZoneImg,
+    image: "/project-icons/techzone/techzone-1.png",
+    // Galería con las 4 imágenes para el modal
+    gallery: [
+      "/project-icons/techzone/techzone-1.png",
+      "/project-icons/techzone/techzone-2.png",
+      "/project-icons/techzone/techzone-3.png",
+      "/project-icons/techzone/techzone-4.png",
+    ],
   },
   {
     id: 2,
@@ -22,15 +24,30 @@ export const projects = [
       "Sistema para llevar el control de inventario, ventas, facturas, pago de nóminas y gestión de usuarios.",
     tags: ["Java", "JavaFX", "Postgres", "Maven"],
     link: "https://github.com/OmarArias72/POS-Gadgets",
-    image: posGadgetsImg,
+    image: "/project-icons/pos-gadgets/pos-gadgets-1.png",
+    // Si tienes más imágenes para este proyecto, agrégalas aquí
+    gallery: [
+      "/project-icons/pos-gadgets/pos-gadgets-1.png",
+      "/project-icons/pos-gadgets/pos-gadgets-2.png",
+      "/project-icons/pos-gadgets/pos-gadgets-3.png",
+      "/project-icons/pos-gadgets/pos-gadgets-4.png",
+    ],
   },
   {
     id: 3,
     title: "TIC Inventario",
     description:
       "Sistema para llevar el control de inventarios, gestión de inventario de salas de cómputo y rastreo de fallos, así como la gestión de salas en periodos ordinario, extraordinario y título.",
-    tags: ["React", "Spring Boot", "Java","Postgres","Docker"],
+    tags: ["React", "Spring Boot", "Java", "Postgres", "Docker"],
     link: "https://github.com/OmarArias72/TIC-UAEMEX-WEB",
-    image: ticInventarioImg,
+    image: "/project-icons/tic-inventario/tic-inventario-1.png",
+    // Si tienes más imágenes para este proyecto, agrégalas aquí
+    gallery: [
+      "/project-icons/tic-inventario/tic-inventario-1.png",
+      "/project-icons/tic-inventario/tic-inventario-2.png",
+      "/project-icons/tic-inventario/tic-inventario-3.png",
+      "/project-icons/tic-inventario/tic-inventario-4.png",
+      "/project-icons/tic-inventario/tic-inventario-5.png",
+    ],
   },
 ];
