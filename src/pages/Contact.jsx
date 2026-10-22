@@ -169,11 +169,9 @@ const Contact = () => {
             <p className="text-[#53464b] font-medium text-sm sm:text-base text-center">
               {t.contact.directEmail}
             </p>
-<<<<<<< HEAD
-            <a href="mailto:omar@omararias.com" className="flex items-center gap-2 font-black text-[#7c49b6] hover:text-[#fa7705] text-lg sm:text-xl transition-colors">
-=======
+
             <a href="mailto:omar.arias.dominguez2@gmail.com" className="flex items-center gap-2 font-black text-[#7c49b6] hover:text-[#fa7705] text-lg sm:text-xl transition-colors">
->>>>>>> contact/contactPage
+
               <FaEnvelope />
               omar.arias.dominguez2@gmail.com
             </a>
