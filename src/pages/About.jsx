@@ -187,98 +187,98 @@ const About = () => {
 
           {/* COLUMNA DERECHA: LA FOTO CON ICONOS FLOTANTES (TEXTURA DE FONDO) */}
           <div
-            className="flex justify-center items-center relative group min-h-75 md:min-h-100 mt-8 lg:mt-0 mx-8 md:mx-0"
-            onMouseEnter={() => setIsPhotoHovered(true)}
-            onMouseLeave={() => setIsPhotoHovered(false)}
-          >
-            {/* Elementos decorativos alrededor de la foto */}
-            <div className="absolute -top-6 -left-6 text-[#fa7705] rotate-12 group-hover:scale-110 transition-transform z-10 opacity-40">
-              <svg
-                aria-hidden="true"
-                className="h-7 w-7 md:h-10 md:w-10"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-              </svg>
-            </div>
+  className="flex justify-center items-center relative group min-h-100 md:min-h-125 lg:min-h-140 mt-8 lg:mt-0 mx-10 md:mx-0"
+  onMouseEnter={() => setIsPhotoHovered(true)}
+  onMouseLeave={() => setIsPhotoHovered(false)}
+>
+  {/* Elementos decorativos alrededor de la foto */}
+  <div className="absolute -top-6 -left-6 text-[#fa7705] rotate-12 group-hover:scale-110 transition-transform z-10 opacity-40">
+    <svg
+      aria-hidden="true"
+      className="h-7 w-7 md:h-10 md:w-10"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </svg>
+  </div>
 
-            {/* ICONOS FLOTANTES - SÓLO 4, COMO TEXTURA DE FONDO */}
-            {floatingIcons.map((icon) => (
-              <div
-                key={icon.id}
-                className={getPositionStyles(icon.position, isPhotoHovered)}
-                aria-hidden="true"
-                style={{
-                  transitionDelay: icon.delay,
-                  transitionProperty: "all",
-                  transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)",
-                }}
-              >
-                <div className="relative">
-                  <img
-                    src={icon.src}
-                    alt=""
-                    width="96"
-                    height="96"
-                    loading="lazy"
-                    decoding="async"
-                    className={`w-14 h-14 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain ${
-                      icon.type === "gif"
-                        ? "animate-float-slow mix-blend-multiply"
-                        : ""
-                    }`}
-                    style={{
-                      filter:
-                        "grayscale(0.5) drop-shadow(0 2px 4px rgba(124, 73, 182, 0.1))",
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
+  {/* ICONOS FLOTANTES - SÓLO 4, COMO TEXTURA DE FONDO */}
+  {floatingIcons.map((icon) => (
+    <div
+      key={icon.id}
+      className={getPositionStyles(icon.position, isPhotoHovered)}
+      aria-hidden="true"
+      style={{
+        transitionDelay: icon.delay,
+        transitionProperty: "all",
+        transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+      }}
+    >
+      <div className="relative">
+        <img
+          src={icon.src}
+          alt=""
+          width="96"
+          height="96"
+          loading="lazy"
+          decoding="async"
+          className={`w-14 h-14 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain ${
+            icon.type === "gif" ? "animate-float-slow mix-blend-multiply" : ""
+          }`}
+          style={{
+            filter:
+              "grayscale(0.5) drop-shadow(0 2px 4px rgba(124, 73, 182, 0.1))",
+          }}
+        />
+      </div>
+    </div>
+  ))}
 
-            {/* LA NOTA (Contenedor de la foto) - CON Z-INDEX ALTO Y BORDE GRUESO */}
-            <div className="relative bg-white p-3 md:p-4 pb-8 md:pb-12 shadow-[10px_10px_0px_0px_rgba(25,15,36,1)] border-4 border-[#190f24] rotate-3 group-hover:rotate-0 group-hover:scale-105 transition-all duration-300 ease-in-out z-30">
-              {/* Efecto de viñeta / outline al hacer hover */}
-              <div className="absolute inset-0 border-4 border-dashed border-[#7c49b6] opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 rounded-lg -z-10"></div>
+  {/* LA NOTA (Contenedor de la foto) - CON Z-INDEX ALTO Y BORDE GRUESO */}
+  <div className="relative bg-white p-3 md:p-4 pb-8 md:pb-12 shadow-[10px_10px_0px_0px_rgba(25,15,36,1)] border-4 border-[#190f24] rotate-3 group-hover:rotate-0 group-hover:scale-105 transition-all duration-300 ease-in-out z-30">
+    {/* Efecto de viñeta / outline al hacer hover */}
+    <div className="absolute inset-0 border-4 border-dashed border-[#7c49b6] opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 rounded-lg -z-10"></div>
 
-              {/* Espacio para la foto */}
-              <div className="w-48 h-48 md:w-64 md:h-64 lg:w-72 lg:h-72 bg-[#f3f4f6] overflow-hidden border-2 border-[#190f24]">
-                <img
-                  src="/perfil/Perfil-foto.jpg"
-                  alt="Omar Arias"
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                />
-              </div>
+    {/* Espacio para la foto — proporción vertical 3:4 para respetar el retrato (768×1364) */}
+    <div className="w-56 h-72 md:w-72 md:h-96 lg:w-80 lg:h-[26rem] bg-[#f3f4f6] overflow-hidden border-2 border-[#190f24]">
+      <img
+        src="/perfil/Perfil-foto.jpg"
+        alt="Omar Arias"
+        width="768"
+        height="1364"
+        className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-500"
+      />
+    </div>
 
-              {/* Texto simulando pie de foto manuscrito */}
-              <p className="absolute bottom-2 md:bottom-3 left-0 w-full text-center font-serif italic text-[#190f24] opacity-80 text-sm md:text-base">
-                Omar.Arias()
-              </p>
+    {/* Texto simulando pie de foto manuscrito */}
+    <p className="absolute bottom-2 md:bottom-3 left-0 w-full text-center font-serif italic text-[#190f24] opacity-80 text-sm md:text-base">
+      {t.about.photoCaption}
+    </p>
 
-              {/* Cinta adhesiva decorativa (Tape) */}
-              <div className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 w-16 md:w-24 h-6 md:h-8 bg-[#38c7bd]/40 backdrop-blur-sm -rotate-2 border-2 border-[#190f24]/20"></div>
-            </div>
+    {/* Cinta adhesiva decorativa (Tape) */}
+    <div className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 w-16 md:w-24 h-6 md:h-8 bg-[#38c7bd]/40 backdrop-blur-sm -rotate-2 border-2 border-[#190f24]/20"></div>
+  </div>
 
-            {/* Garabato naranja inferior */}
-            <div className="absolute -bottom-8 md:-bottom-10 -right-2 md:-right-4 text-[#fa7705] opacity-20 md:opacity-30 z-20">
-              <svg
-                aria-hidden="true"
-                className="h-7 w-14 md:h-10 md:w-20"
-                viewBox="0 0 100 40"
-              >
-                <path
-                  d="M10,30 Q30,10 50,30 T90,30"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </div>
-          </div>
+  {/* Garabato naranja inferior */}
+  <div className="absolute -bottom-8 md:-bottom-10 -right-2 md:-right-4 text-[#fa7705] opacity-20 md:opacity-30 z-20">
+    <svg
+      aria-hidden="true"
+      className="h-7 w-14 md:h-10 md:w-20"
+      viewBox="0 0 100 40"
+    >
+      <path
+        d="M10,30 Q30,10 50,30 T90,30"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+    </svg>
+  </div>
+</div>
         </div>
 
         {/* Rayado decorativo al final de la sección */}
