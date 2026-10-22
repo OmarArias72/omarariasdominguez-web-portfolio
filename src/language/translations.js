@@ -19,7 +19,8 @@ export const translations = {
     header: {
       title: "FullStack Developer",
       subtitle: "I turn ideas and business needs into functional, fast, and easy-to-use web and mobile applications.",
-      downloadCv: "Download CV",
+      viewCv: "View CV",
+  downloadCv: "Download CV",
       viewProjects: "View Projects",
       scroll: "Scroll to explore",
       available: "Open to work",
@@ -170,7 +171,8 @@ export const translations = {
     header: {
       title: "Desarrollador FullStack",
       subtitle: "Transformo ideas y necesidades de negocio en aplicaciones web y móviles funcionales, rápidas y fáciles de usar.",
-      downloadCv: "Descargar CV",
+      viewCv: "Ver CV",
+  downloadCv: "Descargar CV",
       viewProjects: "Ver Proyectos",
       scroll: "Desliza para explorar",
       available: "Disponible para trabajar",

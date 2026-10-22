@@ -1,4 +1,4 @@
-import { FaLinkedin, FaGithub, FaFileDownload, FaArrowRight } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaFileDownload, FaArrowRight, FaFilePdf } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useLanguage } from "../language/useLanguage";
 
@@ -31,7 +31,7 @@ const connectionPath = nodePoints.reduce((path, curr, i) => {
 
 const FloatingCard = ({ icon, text, className, delay = "0s" }) => (
   <div
-    className={`absolute z-20 flex items-center gap-2 rounded-xl border-2 border-[#190f24] bg-white px-3 py-2 shadow-[3px_3px_0px_0px_rgba(25,15,36,1)] animate-float-slow ${className}`}
+    className={`absolute z-30 flex items-center gap-2 rounded-xl border-2 border-[#190f24] bg-white px-3 py-2 shadow-[3px_3px_0px_0px_rgba(25,15,36,1)] animate-float-slow ${className}`}
     style={{ animationDelay: delay }}
   >
     <span aria-hidden="true" className="text-lg">
@@ -139,7 +139,6 @@ const Header = () => {
   }, [displayText, isDeleting, currentIdeaIndex, typingSpeed, t]);
 
   return (
-    // Cambiamos py-8 a pt-32 para evitar el solapamiento con el NavBar
     <section className="relative flex min-h-fit flex-col justify-center overflow-hidden px-4 pt-32 pb-12 sm:px-6 lg:pt-36 lg:pb-16">
       
       {/* --- Doodles de fondo --- */}
@@ -190,10 +189,27 @@ const Header = () => {
             </p>
 
             <div className="flex w-full flex-wrap items-center justify-center gap-3 sm:justify-start">
-              <a href="#contact" className="hand-drawn flex items-center justify-center gap-2 border-2 border-[#190f24] bg-[#7c49b6] px-6 py-3.5 font-black tracking-wider text-white uppercase no-underline shadow-[4px_4px_0px_0px_rgba(25,15,36,1)] transition-all duration-300 hover:scale-105 hover:bg-[#633a92] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7c49b6] active:scale-95 active:shadow-none">
-                <FaFileDownload className="text-lg" aria-hidden="true" />
-                {t.header.downloadCv}
-              </a>
+              
+  {/* Botón principal: Ver CV */}
+  <a 
+    href="/CV_Omar_Arias_Dominguez.pdf" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="hand-drawn flex items-center justify-center gap-2 border-2 border-[#190f24] bg-[#7c49b6] px-6 py-3.5 font-black tracking-wider text-white uppercase no-underline shadow-[4px_4px_0px_0px_rgba(25,15,36,1)] transition-all duration-300 hover:scale-105 hover:bg-[#633a92] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7c49b6] active:scale-95 active:shadow-none"
+  >
+    <FaFilePdf className="text-lg" aria-hidden="true" />
+    {t.header.viewCv || "Ver CV"} {/* Usa la traducción o un fallback */}
+  </a>
+
+  {/* Botón secundario: Descargar CV */}
+  <a 
+    href="/CV_Omar_Arias_Dominguez.pdf" 
+    download="CV_Omar_Arias_Dominguez.pdf"
+    aria-label={t.header.downloadCv}
+    className="hand-drawn flex items-center justify-center border-2 border-[#321d49] bg-white px-4 py-3.5 text-[#321d49] no-underline transition-all duration-300 hover:scale-105 hover:bg-[#321d49] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#321d49] active:scale-95"
+  >
+    <FaFileDownload className="text-lg" aria-hidden="true" />
+  </a>
               <a href="#projects" className="hand-drawn flex items-center justify-center gap-2 border-2 border-[#321d49] bg-white px-6 py-3.5 font-bold text-[#321d49] no-underline transition-all duration-300 hover:scale-105 hover:bg-[#321d49] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#321d49] active:scale-95">
                 {t.header.viewProjects}
                 <FaArrowRight className="text-sm" aria-hidden="true" />
@@ -227,37 +243,61 @@ const Header = () => {
             </div>
           </div>
 
-          {/* COLUMNA DERECHA: Foto + Elementos de Confianza */}
-          <div className="relative flex justify-center items-center min-h-[400px] lg:min-h-[500px] mt-16 lg:mt-0">
+          {/* COLUMNA DERECHA: Foto en Rectángulo Redondeado + Tarjetas Solapadas */}
+          <div className="relative flex justify-center items-center min-h-[450px] lg:min-h-[550px] mt-16 lg:mt-0 z-10">
             
-            {/* Tarjetas Flotantes - Reposicionadas para evitar solapamientos con la imagen y bordes */}
-            <FloatingCard icon="🛠️" text={t.header.floatingCards.support} className="-top-4 -left-4 lg:-top-8 lg:-left-12" delay="0s" />
-            <FloatingCard icon="⚡" text={t.header.floatingCards.agile} className="bottom-1/4 -left-9 lg:-left-8" delay="2s"  />
-            <FloatingCard icon="📱" text={t.header.floatingCards.responsive} className="top-1/4 -right-12 lg:-right-10 lg:top-1/8" delay="1s" />
-            
-
-            {/* Avatar Principal */}
-            <div className="relative group z-10 flex flex-col items-center">
-              <div className="relative">
-                <div className="absolute inset-0 rounded-full border-4 border-dashed border-[#cbb6e2] animate-spin-slow -z-10" style={{ animationDuration: '30s', transform: 'scale(1.15)' }}></div>
+            {/* Contenedor del Avatar y las Tarjetas */}
+            <div className="relative group">
+              
+              {/* Anillo decorativo giratorio (adaptado a la forma rectangular) */}
+              <div className="absolute -inset-4 rounded-[2.5rem] border-4 border-dashed border-[#cbb6e2] animate-spin-slow -z-10" style={{ animationDuration: '30s' }}></div>
+              
+              {/* La foto en rectángulo redondeado */}
+              <div className="relative overflow-hidden rounded-3xl border-4 border-[#190f24] shadow-[8px_8px_0px_0px_rgba(25,15,36,1)] bg-[#f3f4f6] transition-transform duration-500 group-hover:scale-[1.02]">
                 <img
                   src="/perfil/Perfil-foto.jpg"
                   alt="Omar Arias"
-                  width="300"
-                  height="300"
+                  width="768"
+                  height="1364"
                   loading="eager"
                   decoding="async"
-                  className="h-56 w-56 rounded-full border-4 border-[#190f24] object-cover object-[center_25%] shadow-[8px_8px_0px_0px_rgba(25,15,36,1)] brightness-110 contrast-105 transition-transform duration-500 group-hover:scale-105 sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-80 lg:w-80"
+                  className="h-72 w-56 object-cover object-top sm:h-80 sm:w-64 md:h-96 md:w-72 lg:h-[28rem] lg:w-80 brightness-110 contrast-105"
                 />
               </div>
-              
-              {/* Prompter amarillo (con margen superior para que no choque con el badge de Soporte) */}
-              <div className="relative z-20 mt-8 whitespace-nowrap rounded-full border-2 border-[#190f24] bg-[#ffeaa5] px-4 py-1.5 font-mono text-xs font-bold shadow-[3px_3px_0px_0px_rgba(25,15,36,1)] sm:px-5 sm:py-2 sm:text-sm">
+
+              {/* Prompter amarillo (colocado justo debajo de la foto, solapando un poco) */}
+              <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 z-20 whitespace-nowrap rounded-full border-2 border-[#190f24] bg-[#ffeaa5] px-4 py-1.5 font-mono text-xs font-bold shadow-[3px_3px_0px_0px_rgba(25,15,36,1)] sm:px-5 sm:py-2 sm:text-sm">
                 <span aria-hidden="true" className="mr-1 text-[#fa7705]">&gt;</span>
                 {displayText}
                 <span className="ml-0.5 animate-pulse text-[#fa7705]">|</span>
               </div>
+
+              {/* --- TARJETAS FLOTANTES SOLAPADAS --- */}
+              {/* Soporte y Mantenimiento (Arriba Izquierda) */}
+              <FloatingCard 
+                icon="🛠️" 
+                text={t.header.floatingCards.support} 
+                className="-top-8 -left-6 lg:-top-17 lg:-left-18 rotate-[-6deg]" 
+                delay="0s" 
+              />
+              
+              {/* Desarrollo Ágil (Centro Izquierda) */}
+              <FloatingCard 
+                icon="⚡" 
+                text={t.header.floatingCards.agile} 
+                className="top-1/2 -left-10 lg:-left-37 -translate-y-1/3 rotate-[5deg]" 
+                delay="1s" 
+              />
+              
+              {/* 100% Adaptable (Abajo Derecha) */}
+             <FloatingCard 
+  icon="📱" 
+  text={t.header.floatingCards.responsive} 
+  className="-top-17 left-[90%] sm:left-[95%] rotate-[-3deg] whitespace-nowrap" 
+  delay="2s" 
+/>
             </div>
+
           </div>
         </div>
 
