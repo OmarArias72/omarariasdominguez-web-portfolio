@@ -5,7 +5,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const { user_name, user_email, message } = req.body;
+  // <-- Añadido 'subject'
+  const { user_name, user_email, subject, message } = req.body;
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -18,19 +19,23 @@ export default async function handler(req, res) {
   try {
     await transporter.sendMail({
       from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER, // Te envías el email a ti mismo
+      to: process.env.EMAIL_USER, 
       replyTo: user_email,
-      subject: `Nuevo mensaje de ${user_name}`,
+      // Modificado para usar el subject del formulario si existe
+      subject: subject ? `[Portfolio] ${subject}` : `Nuevo mensaje de ${user_name}`,
       text: `
         Nombre: ${user_name}
         Email: ${user_email}
+        Asunto: ${subject}
         Mensaje: ${message}
       `,
       html: `
         <h3>Nuevo mensaje de contacto</h3>
         <p><strong>Nombre:</strong> ${user_name}</p>
         <p><strong>Email:</strong> ${user_email}</p>
-        <p><strong>Mensaje:</strong> ${message}</p>
+        <p><strong>Asunto:</strong> ${subject}</p>
+        <p><strong>Mensaje:</strong></p>
+        <p style="white-space: pre-wrap;">${message}</p>
       `,
     });
 

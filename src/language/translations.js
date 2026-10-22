@@ -138,12 +138,15 @@ export const translations = {
       namePlaceholder: "How should I call you?",
       email: "Email:",
       emailPlaceholder: "your@email.com",
+      subject: "Subject:", // <-- NUEVO
+      subjectPlaceholder: "What is this about?", // <-- NUEVO
       message: "Message:",
       messagePlaceholder: "Write your idea here...",
       send: "Send Message!",
       sending: "Sending...",
       success: "✨ Got it! I'll write back soon.",
       error: "Oops! Something failed. Try again?",
+      directEmail: "Or email me directly at:", // <-- NUEVO
       quickTitle: "⚡ QUICK",
       quickText: "I usually reply in less than 24h!",
       availableTitle: "📅 AVAILABLE",
@@ -287,12 +290,15 @@ export const translations = {
       namePlaceholder: "¿Cómo te llamo?",
       email: "Correo:",
       emailPlaceholder: "tu@correo.com",
+      subject: "Asunto:", // <-- NUEVO
+      subjectPlaceholder: "¿De qué se trata?", // <-- NUEVO
       message: "Mensaje:",
       messagePlaceholder: "Escribe aquí tu idea...",
       send: "¡Enviar mensaje!",
       sending: "Enviando...",
       success: "✨ ¡Recibido! Te responderé pronto.",
       error: "¡Ups! Algo falló. ¿Intentas de nuevo?",
+      directEmail: "O escríbeme directamente a:", // <-- NUEVO
       quickTitle: "⚡ RÁPIDO",
       quickText: "¡Suelo responder en menos de 24h!",
       availableTitle: "📅 DISPONIBLE",
